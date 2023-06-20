@@ -3,8 +3,11 @@ import { darkTheme } from "@/app/GlobalMUI";
 import { api } from "@/lib/api";
 import { Box, TextField, ThemeProvider, Button } from "@mui/material";
 import { FormEvent } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function NewClient() {
+  const router = useRouter();
+
   async function handleSubmitClient(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -21,6 +24,8 @@ export default function NewClient() {
         uf: formData.get('uf'),
       },
     )
+
+    router.push('/cliente')
   }
 
   return (
