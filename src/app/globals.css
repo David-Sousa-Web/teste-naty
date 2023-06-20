@@ -1,10 +1,6 @@
 body {
   background-color: #121214;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-  gap: 40px;
+  
+
 }
