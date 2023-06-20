@@ -60,7 +60,6 @@ export default function Cliente() {
       await api.delete(`/Cliente/${deletingClientId}`, {
         headers: {
           'Content-Type': 'text/json',
-          Accept: '*/*'
         },
       });
       setOpenDialog(false);
