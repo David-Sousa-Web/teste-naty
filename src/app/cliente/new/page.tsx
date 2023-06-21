@@ -20,7 +20,7 @@ export default function NewClient() {
         logradouro: formData.get('logradouro'),
         numero: formData.get('numero'),
         bairro: formData.get('bairro'),
-        cidade: formData.get('tipoDocumento'),
+        cidade: formData.get('cidade'),
         uf: formData.get('uf'),
       },
     )

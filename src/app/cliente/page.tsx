@@ -1,8 +1,7 @@
 'use client'
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider, createTheme } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material';
 import { darkTheme, lightfont } from '../GlobalMUI';
 import { api } from '@/lib/api';
 import Link from 'next/link';
@@ -57,16 +56,28 @@ export default function Cliente() {
     if (!deletingClientId) return;
 
     try {
-      await api.delete(`/Cliente/${deletingClientId}`, {
+      await api.delete(`/Cliente/${(deletingClientId)}`, {
         headers: {
-          'Content-Type': 'text/json',
+          'Content-Type': 'application/json',
         },
+        data: {
+          id: deletingClientId
+        }
+        
       });
       setOpenDialog(false);
       setDeletingClientId(null);
+      
     } catch (error) {
       console.error('Erro ao excluir o cliente', error);
     }
+
+    setTimeout(function () {
+      const currentUrl = window.location.href;
+      const refreshedUrl = `${currentUrl}`;
+      window.location.href = refreshedUrl;
+    }, 1000);
+    
   };
 
   const cancelDeleteClient = () => {
