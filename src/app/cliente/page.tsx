@@ -72,11 +72,12 @@ export default function Cliente() {
       console.error('Erro ao excluir o cliente', error);
     }
 
-    setTimeout(function () {
+    setTimeout(() => {
       const currentUrl = window.location.href;
       const refreshedUrl = `${currentUrl}`;
       window.location.href = refreshedUrl;
     }, 1000);
+    
     
   };
 
