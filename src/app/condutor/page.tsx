@@ -8,45 +8,42 @@ import { darkTheme, lightfont } from '../GlobalMUI';
 import { api } from '@/lib/api';
 import Link from 'next/link';
 
-export interface Client {
+export interface Conductor {
   id: number;
-  numeroDocumento: string;
-  tipoDocumento: string;
   nome: string;
-  logradouro: string;
-  numero: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
+  numeroHabilitacao: string;
+  catergoriaHabilitacao: string;
+  categoriaHabilitacao: string;
+  vencimentoHabilitacao: string;
 }
 
-export default function Cliente() {
+export default function Conductor() {
   const router = useRouter();
 
-  const [deletingClientId, setDeletingClientId] = useState<number | null>(null);
+  const [deletingCondutoresId, setDeletingCondutoresId] = useState<number | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const [clientes, setClientes] = useState<Client[]>([]);
+  const [condutores, setCondutores] = useState<Conductor[]>([]);
 
-  const fetchClientes = async () => {
+  const fetchConductor = async () => {
     try {
-      const response = await api.get('/Cliente');
-      return response.data as Client[];
+      const response = await api.get('/Condutor');
+      return response.data as Conductor[];
     } catch (error) {
-      console.error('falha ao procurar os clientes', error);
+      console.error('falha ao procurar os codutores', error);
       return [];
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedClientes = await fetchClientes();
-      setClientes(fetchedClientes);
+      const fetchedConductor = await fetchConductor();
+      setCondutores(fetchedConductor);
     };
     fetchData();
   }, []);
 
-  const handleUpdateClient = (clientId: number) => {
-    router.push(`/cliente/atualizar?id=${clientId}`);
+  const handleUpdateConductor = (conductorId: number) => {
+    router.push(`/condutor/atualizar?id=${conductorId}`);
     
     setTimeout(() => {
       const currentUrl = window.location.href;
@@ -55,26 +52,26 @@ export default function Cliente() {
     }, 1000);
   };
 
-  const handleDeleteClient = (clientId: number) => {
-    setDeletingClientId(clientId);
+  const handleDeleteConductor= (conductorId: number) => {
+    setDeletingCondutoresId(conductorId);
     setOpenDialog(true);
   };
 
-  const confirmDeleteClient = async () => {
-    if (!deletingClientId) return;
+  const confirmDeleteConductor = async () => {
+    if (!deletingCondutoresId) return;
 
     try {
-      await api.delete(`/Cliente/${(deletingClientId)}`, {
+      await api.delete(`/Condutor/${(deletingCondutoresId)}`, {
         headers: {
           'Content-Type': 'application/json',
         },
         data: {
-          id: deletingClientId
+          id: deletingCondutoresId
         }
         
       });
       setOpenDialog(false);
-      setDeletingClientId(null);
+      setDeletingCondutoresId(null);
       
     } catch (error) {
       console.error('Erro ao excluir o cliente', error);
@@ -87,17 +84,17 @@ export default function Cliente() {
     }, 1000);
   };
 
-  const cancelDeleteClient = () => {
+  const cancelDeleteConductor = () => {
     setOpenDialog(false);
-    setDeletingClientId(null);
+    setDeletingCondutoresId(null);
   };
 
   return (
     <>
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>      
-        <h1>Clientes</h1>
+        <h1>Condutores</h1>
 
-        <Button variant="contained" color="primary" component={Link} href="/cliente/new" sx={{ left: "630px", marginBottom: "5px" }}>
+        <Button variant="contained" color="primary" component={Link} href="/condutor/new" sx={{ left: "450px", marginBottom: "5px" }}>
           Criar
         </Button>
         <div>
@@ -108,44 +105,36 @@ export default function Cliente() {
                   <TableHead>
                     <TableRow>
                       <TableCell>Id</TableCell>
-                      <TableCell align="left">Numero do Documento</TableCell>
-                      <TableCell align="left">tipoDocumento</TableCell>
                       <TableCell align="left">nome</TableCell>
-                      <TableCell align="left">logradouro</TableCell>
-                      <TableCell align="left">numero</TableCell>
-                      <TableCell align="left">bairro</TableCell>
-                      <TableCell align="left">cidade</TableCell>
-                      <TableCell align="left">uf</TableCell>
+                      <TableCell align="left">numero Habilitacao</TableCell>
+                      <TableCell align="left">catergoria Habilitacao</TableCell>
+                      <TableCell align="left">vencimento Habilitacao</TableCell>
                       <TableCell align="left"></TableCell>
                     </TableRow>
                   </TableHead>
                 </ThemeProvider>
                 <TableBody>
-                  {clientes.map((client) => (
-                    <TableRow key={client.id} >
+                  {condutores.map((cond) => (
+                    <TableRow key={cond.id} >
                       <TableCell component="th" scope="row">
-                        {client.id}
+                        {cond.id}
                       </TableCell>
-                      <TableCell align="left">{client.numeroDocumento}</TableCell>
-                      <TableCell align="left">{client.tipoDocumento}</TableCell>
-                      <TableCell align="left">{client.nome}</TableCell>
-                      <TableCell align="left">{client.logradouro}</TableCell>
-                      <TableCell align="left">{client.numero}</TableCell>
-                      <TableCell align="left">{client.bairro}</TableCell>
-                      <TableCell align="left">{client.cidade}</TableCell>
-                      <TableCell align="left" >{client.uf}</TableCell>
+                      <TableCell align="left">{cond.nome}</TableCell>
+                      <TableCell align="left">{cond.numeroHabilitacao}</TableCell>
+                      <TableCell align="left">{cond.catergoriaHabilitacao}</TableCell>
+                      <TableCell align="left">{cond.vencimentoHabilitacao}</TableCell>
                       <TableCell align="left">
                         <Button
                           variant="outlined"
                           style={{ marginRight: 10 }}
-                          onClick={() => handleUpdateClient(client.id)}
+                          onClick={() => handleUpdateConductor(cond.id)}
                         >
                           <EditIcon />
                         </Button>
                         <Button
                           variant="outlined"
                           color="error"
-                          onClick={() => handleDeleteClient(client.id)}
+                          onClick={() => handleDeleteConductor(cond.id)}
                         >
                           <DeleteRoundedIcon />
                         </Button>
@@ -156,14 +145,14 @@ export default function Cliente() {
               </Table>
             </TableContainer>
 
-            <Dialog open={openDialog} onClose={cancelDeleteClient}>
+            <Dialog open={openDialog} onClose={cancelDeleteConductor}>
               <DialogTitle>Confirmar Exclusão</DialogTitle>
               <DialogContent>
-                Tem certeza que deseja excluir o cliente?
+                Tem certeza que deseja excluir o condutor?
               </DialogContent>
               <DialogActions>
-                <Button onClick={cancelDeleteClient}>Cancelar</Button>
-                <Button onClick={confirmDeleteClient} color="error">
+                <Button onClick={cancelDeleteConductor}>Cancelar</Button>
+                <Button onClick={confirmDeleteConductor} color="error">
                   Excluir
                 </Button>
               </DialogActions>
@@ -175,3 +164,4 @@ export default function Cliente() {
     </>
   );
 }
+
