@@ -8,16 +8,9 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter()
 
-  function handleClientPage() {
-    router.push('/cliente')
-  }
-
   return (
     <>
-      <h1 className="title-home">Escolha o deslocamento</h1>
-      <Box>     
-          <Button variant="outlined" size="large" onClick={handleClientPage}>Cliente</Button> 
-      </Box>
+      <h1 className="title">BEM VINDO!!</h1>
     </>
   )
 }

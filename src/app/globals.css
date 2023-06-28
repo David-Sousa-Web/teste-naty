@@ -5,3 +5,9 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.title {
+  display: flex;
+  justify-content: center;
+  padding-top: 15%;
+}

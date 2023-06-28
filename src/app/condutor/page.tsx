@@ -81,7 +81,7 @@ export default function Conductor() {
       const currentUrl = window.location.href;
       const refreshedUrl = `${currentUrl}`;
       window.location.href = refreshedUrl;
-    }, 1000);
+    }, 3000);
   };
 
   const cancelDeleteConductor = () => {

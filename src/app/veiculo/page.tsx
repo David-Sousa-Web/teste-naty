@@ -48,7 +48,7 @@ export default function Vehicles() {
       const currentUrl = window.location.href;
       const refreshedUrl = `${currentUrl}`;
       window.location.href = refreshedUrl;
-    }, 2000);
+    }, 3000);
   };
 
   const handleDeleteVehicles= (veiculoId: number) => {

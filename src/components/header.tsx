@@ -44,6 +44,10 @@ export default function Header() {
   function handleVeiculoPage() {
     router.push('/veiculo')
   }
+
+  function handleDisplacementPage() {
+    router.push('/deslocamento')
+  }
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar position="static">
@@ -101,10 +105,13 @@ export default function Header() {
                   <Typography textAlign="center" onClick={handleClientPage}>Cliente</Typography>
                 </MenuItem>
                 <MenuItem>
-                  <Typography textAlign="center" onClick={handleClientPage}>Cliente</Typography>
+                  <Typography textAlign="center" onClick={handleCondutorPage}>Condutor</Typography>
                 </MenuItem>
                 <MenuItem>
-                  <Typography textAlign="center" onClick={handleClientPage}>Cliente</Typography>
+                  <Typography textAlign="center" onClick={handleVeiculoPage}>Veiculo</Typography>
+                </MenuItem>
+                <MenuItem>
+                  <Typography textAlign="center" onClick={handleDisplacementPage}>Deslocamento</Typography>
                 </MenuItem>
               </Menu>
             </Box>
@@ -125,7 +132,7 @@ export default function Header() {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              Naty
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 <Button
@@ -147,7 +154,7 @@ export default function Header() {
                   Veiculo
                 </Button>
                 <Button
-                  onClick={handleClientPage}
+                  onClick={handleDisplacementPage}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   Deslocamento
@@ -158,7 +165,7 @@ export default function Header() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title={'profile pick'}>
                 <IconButton sx={{ p: 0 }}>
-                  <Avatar alt="David Sousa" src='src/assets/Pigeon2.png'/>
+                  <Avatar alt="David Sousa" src='@/assets/Pigeon2.png'/>
                 </IconButton>
               </Tooltip>
             </Box>

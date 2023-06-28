@@ -8,9 +8,10 @@ import queryString from "query-string";
 import { FormEvent, useEffect, useState} from "react";
 import React from 'react'
 
-const { id } = queryString.parse(window.location.search);
 
-export default function UpdateConductor() { 
+
+export default function UpdateConductor() {
+  const { id } = queryString.parse(window.location.search);
   const router = useRouter();
   
   const [data, setData] = useState<Conductor>({
